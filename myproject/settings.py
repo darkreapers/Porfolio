@@ -16,8 +16,6 @@ import django_heroku
 import dj_database_url
 
 
-bashCommand = "heroku config:get DATABASE_URL -a myapp"
-output = subprocess.check_output(['bash', '-c', bashCommand]).decode("utf-8")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
