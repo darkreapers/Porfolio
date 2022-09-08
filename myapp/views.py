@@ -1,5 +1,4 @@
 from email.policy import default
-from tkinter import END
 from django.shortcuts import render , redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User, auth
@@ -27,7 +26,7 @@ def register(request):
                 return redirect('register')
             else:
                 user = User.objects.create_user(username=username, email=email, password=password)
-                user.save();
+                user.save()
                 return redirect('login')
         else:
             messages.info(request, 'Password not the same')
