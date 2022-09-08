@@ -11,9 +11,13 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
-import os
+import os , subprocess
 import django_heroku
 import dj_database_url
+
+
+bashCommand = "heroku config:get DATABASE_URL -a myapp"
+output = subprocess.check_output(['bash', '-c', bashCommand]).decode("utf-8")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,7 +30,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-khdjf%=xq+q@qxw!_^r3j%*3gg^=3yexof_%mba%2&s=s$ay!)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -90,7 +94,7 @@ DATABASES = {
     }
 }
 
-db_from_env = dj_database_url.config(conn_max_age=600)
+db_from_env = dj_database_url.config(conn_max_age=600, ssl_require=True)
 DATABASES['default'].update(db_from_env)
 
 # Password validation
